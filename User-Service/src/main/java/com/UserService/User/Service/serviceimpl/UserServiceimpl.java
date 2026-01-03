@@ -26,7 +26,7 @@ public class UserServiceimpl implements UserService {
                 .password(userRequest.getPassword())
                 .phone(userRequest.getPhone())
                 .role(String.valueOf(Role.Normal))
-                .isActive(true)
+                .isActive(false)
                 .build();
         User saveduser= userRepository.save(user);
         return mapToResponse(saveduser);

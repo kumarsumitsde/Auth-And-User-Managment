@@ -1,6 +1,7 @@
 package com.auth_service.auth_service.controller;
 import com.auth_service.auth_service.dto.AuthResponce;
 import com.auth_service.auth_service.dto.LoginRequest;
+import com.auth_service.auth_service.dto.SignUpRequest;
 import com.auth_service.auth_service.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,5 +23,10 @@ public class AuthController {
             @RequestBody LoginRequest request) {
 
         return ResponseEntity.ok(authService.login(request));
+    }
+    @PostMapping("/signup")
+    public ResponseEntity<String> signUp(@RequestBody SignUpRequest dto) {
+
+        return ResponseEntity.ok(authService.signUp(dto));
     }
 }

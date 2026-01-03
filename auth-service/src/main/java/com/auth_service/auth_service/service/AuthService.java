@@ -1,9 +1,7 @@
 package com.auth_service.auth_service.service;
 
 import com.auth_service.auth_service.client.UserClient;
-import com.auth_service.auth_service.dto.AuthResponce;
-import com.auth_service.auth_service.dto.LoginRequest;
-import com.auth_service.auth_service.dto.UserDto;
+import com.auth_service.auth_service.dto.*;
 import com.auth_service.auth_service.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,6 +28,15 @@ public class AuthService {
         String token = jwtUtil.generateToken(user);
         return new AuthResponce(token, true);
 
+    }
+
+    public String signUp(SignUpRequest dto){
+        userClient.createUser(dto);
+        userClient.sendEmail(dto.getEmail(),
+                "Account Activation",
+                "Please activate your account using the following link: ",
+                "http://example.com/activate?token=ewrtgtrfthg3re");
+        return "User created successfully. Activation email sent.";
     }
 
 }
