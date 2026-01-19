@@ -10,7 +10,11 @@ import com.UserService.User.Service.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 
 @RequiredArgsConstructor
@@ -27,10 +31,25 @@ public class UserController {
         return userService.createUser(request);
     }
 
+//    @GetMapping("email/{email}")
+//    public UserResponceDto getUserByEmailid(@PathVariable String email){
+//        return userService.getUserByEmail(email);
+//    }
     @GetMapping("email/{email}")
-    public UserResponceDto getUserByEmailid(@PathVariable String email){
-        return userService.getUserByEmail(email);
+    public ResponseEntity<UserResponceDto> getUserByEmailid(@PathVariable String email){
+        User user = userRepository.findByEmail(email).orElseThrow(()-> new RuntimeException("User not found"));
+        UserResponceDto userResponceDto= UserResponceDto.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .isActive(user.getIsActive())
+                .email(user.getEmail())
+                .phone(user.getPhone())
+                .role(user.getRole())
+                .build();
+        return ResponseEntity.ok(userResponceDto);
+
     }
+
     @GetMapping("id/{id}")
     public UserResponceDto getUserById(@PathVariable Long id){
         return userService.getUserById(id);

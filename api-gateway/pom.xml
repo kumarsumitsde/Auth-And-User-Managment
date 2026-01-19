@@ -10,8 +10,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.4</version>
-		<relativePath/>
+		<version>3.2.5</version>
 	</parent>
 
 	<groupId>com.api-gateway</groupId>
@@ -22,7 +21,6 @@
 
 	<properties>
 		<java.version>17</java.version>
-		<!-- ✅ STABLE SPRING CLOUD VERSION -->
 		<spring-cloud.version>2023.0.4</spring-cloud.version>
 	</properties>
 
@@ -32,12 +30,6 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-gateway</artifactId>
-		</dependency>
-
-		<!-- ✅ Eureka Client (KEEP only if you actually use Eureka) -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 
 		<!-- ✅ JWT (Same as auth-service) -->
@@ -64,8 +56,21 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
 
-	</dependencies>
+    </dependencies>
 
 	<!-- ✅ Spring Cloud BOM -->
 	<dependencyManagement>
@@ -73,7 +78,7 @@
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>${spring-cloud.version}</version>
+				<version>2023.0.2</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
